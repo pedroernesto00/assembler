@@ -1,5 +1,6 @@
 import sys
 
+#dicionario das instruções com seus respectivos codigos hexadecimais e operando(s)
 dic_instrucoes = {
     'nop':           [0x01, []], 'iadd':          [0x02, []], 'isub':          [0x05, []], 'iand':          [0x08, []],
     'ior':           [0x0b, []], 'dup':           [0x0e, []], 'pop':           [0x10, []], 'swap':          [0x13, []],
@@ -10,10 +11,10 @@ dic_instrucoes = {
     'if_icmpeq':     [0x4b, ['offset']],          'invokevirtual': [0x55, ['disp']],       'ireturn':       [0x6b, []]
 }
 
-dic_labels = {}
-dic_variaveis = {}
-lista_bytes = []
-tela_erro = ""
+dic_labels = {}    # dicionario para armazenar as labels e os respectivos endereços
+dic_variaveis = {} # dicionario para armazenar as variáveis e os respectivos endereços
+lista_bytes = []   # lista que armazena os endereços das labels, variaveis, instruções e operandos
+tela_erro = ""     
 
 
 contador_linha = 0
