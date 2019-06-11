@@ -11,14 +11,14 @@ mov cx, 0
 lerEntrada:
     mov ah, 0
     int 0x16
-
-    cmp al, 13
-    je printarContrario
     
     mov ah, 0x0e
     int 0x10
     push ax
-    int cx
+    inc cx
+
+    cmp al, 13
+    je printarContrario
 
     jmp lerEntrada
 

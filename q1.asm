@@ -10,7 +10,7 @@ mov al, 0x13
 int 0x10
 
 int 0x13
-mov ah 0x02
+mov ah, 0x02
 mov al, 32
 mov ch, 0
 mov dh, 0
