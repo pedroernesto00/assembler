@@ -20,14 +20,14 @@ int 0x13
 
 mov ax, 0xa000
 mov es, ax
-mov di, 64000
+mov cx, 64000
 
 copiarImagem:
-    mov si, [bx]
+    mov di, [bx]
     mov [es:di], ax
     inc bx
-    dec di
-    or di, di
+    dec cx
+    or cx, cx
     jnz copiarImagem
 
     hlt

@@ -19,29 +19,28 @@ mov bx, 0x7e00
 int 0x13
 
 
-mov si, matricula
+
 mov ah, 0x0e
 
+reset:
+    mov si, matricula
 printar:
-    mov al, [si]
-    mov dl, [bx]
+    mov al, [bx]
+    mov dl, [si]
 
-    or al,al
+    cmp al, 0
     jz .fim
 
     cmp dl, 10
-    je .reset
+    je reset
 
-    sub dl, al
+    sub al, dl
     int 0x10
 
     inc si
     inc bx
     jmp printar
 
-.reset:
-    mov si, matricula
-    jmp printar
 
 .fim:
     hlt
