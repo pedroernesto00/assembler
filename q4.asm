@@ -9,24 +9,29 @@ cli
 mov al, 0x13
 int 0x10
 
-mov ax, 0xa000
-mov es, ax
+mov bx, 0xa000
+mov es, bx
 
+mov cx, 0
+mov di, 0
+push cx
 
-lerTecla:
-    mov ax, 0
-    int 0x16
+printar:
+	mov [es:di], cx
+	
+	cmp di, 64000
+	je .reset
+	
+	inc cx
+	inc di
+	jmp printar
 
-    mov cx, 6400
-
-    .pinta: 
-        mov di, cx
-        mov [es:di], al
-        dec cx
-        or cx, cx
-        jnz lerTecla
-        jmp .pinta 
-
-
+.reset:
+	pop cx
+	inc cx
+	push cx
+	mov di, 0
+	jmp printar
+	
 times 510 - ($-$$) db 0
 dw 0xaa55

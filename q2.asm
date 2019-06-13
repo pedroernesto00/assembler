@@ -6,9 +6,6 @@ mov ds, ax
 
 cli
 
-mov al, 0x13
-int 0x10
-
 int 0x13
 mov ah, 0x02
 mov al, 1
@@ -18,34 +15,36 @@ mov cl, 2
 mov bx, 0x7e00
 int 0x13
 
-
-
 mov ah, 0x0e
-
 reset:
-    mov si, matricula
-printar:
-    mov al, [bx]
-    mov dl, [si]
+	mov si, matricula
 
-    cmp al, 0
-    jz .fim
+dec:
+	mov al, [bx]
+	
+	cmp al, 0
+	je .fim
 
-    cmp dl, 10
-    je reset
+	mov dl, [si]
 
-    sub al, dl
-    int 0x10
-
-    inc si
-    inc bx
-    jmp printar
-
-
+	cmp dl, 10
+	je reset
+ 	
+	sub al, dl
+	
+	int 0x10
+	
+	inc si
+	inc bx
+	
+	jmp dec
+		
 .fim:
-    hlt
-
-matricula: db 4, 1, 8, 4, 6, 5, 10 
+	hlt
+	
+matricula:
+	db 4,1,8,4,6,5,10
 
 times 510 - ($-$$) db 0
 dw 0xaa55
+

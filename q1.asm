@@ -20,18 +20,22 @@ int 0x13
 
 mov ax, 0xa000
 mov es, ax
-mov cx, 64000
+mov cx, 0
 
-copiarImagem:
-    mov di, [bx]
-    mov [es:di], ax
-    inc bx
-    dec cx
-    or cx, cx
-    jnz copiarImagem
+lerImagem:
+	mov di, cx
+	mov ax, [bx]
+	mov [es:di], ax
+	
+	cmp cx, 16000
+	je .fim
+	
+	inc cx
+	inc bx
 
-    hlt
+	jmp lerImagem
 
-
+.fim:
+	jmp .fim		
 times 510 - ($-$$) db 0
 dw 0xaa55
